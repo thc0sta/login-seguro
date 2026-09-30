@@ -48,17 +48,16 @@ Essas credenciais são apenas para o ambiente de demonstração do trabalho.
 
 O processo de login acontece da seguinte forma:
 
-Ao abrir a tela, o sistema solicita um desafio ao servidor.
-O servidor gera um token CSRF e guarda apenas o hash desse token.
-Também é criada uma pergunta matemática para o desafio anti-robô.
-Ao enviar o formulário, o servidor verifica o token CSRF e confirma se ele ainda é válido e não foi usado anteriormente.
-O desafio anti-robô também é conferido.
-Depois dessas verificações, o sistema procura o usuário no banco utilizando o ORM:
-eq(loginAccounts.username, username).
-A senha informada é comparada com o hash armazenado utilizando scrypt e timingSafeEqual.
-Se estiver tudo correto, uma sessão é criada em um cookie HTTP-only.
-Se a senha estiver errada, o contador de tentativas aumenta.
-Depois de cinco falhas, o acesso daquela origem fica bloqueado por dez minutos.
+1. Ao abrir a tela, o sistema solicita um desafio ao servidor.
+2. O servidor gera um token CSRF e guarda apenas o hash desse token.
+3. Também é criada uma pergunta matemática para o desafio anti-robô.
+4. Ao enviar o formulário, o servidor verifica o token CSRF e confirma se ele ainda é válido e não foi usado anteriormente.
+5. O desafio anti-robô também é conferido.
+6. Depois dessas verificações, o sistema procura o usuário no banco utilizando o ORM: eq(loginAccounts.username, username).
+7. A senha informada é comparada com o hash armazenado utilizando scrypt e timingSafeEqual.
+8. Se estiver tudo correto, uma sessão é criada em um cookie HTTP-only.
+9. Se a senha estiver errada, o contador de tentativas aumenta.
+10. Depois de cinco falhas, o acesso daquela origem fica bloqueado por dez minutos.
 
 ```Observação sobre IP/MAC: o navegador não disponibiliza o endereço MAC para um site. Por isso, para esta atividade foi utilizada a origem de rede/IP recebida pelo servidor, que corresponde à alternativa prevista no enunciado.```
 
